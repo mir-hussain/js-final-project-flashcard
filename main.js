@@ -31,4 +31,33 @@ const flashcardsData = [
   },
 ];
 
-flashcardsData.forEach((item) => console.log(item.word));
+const cardContainer = document.getElementById('card-container');
+const startButton = document.getElementById('start-button');
+const resetButton = document.getElementById('reset-button');
+
+const handleStart = () => {
+  flashcardsData.forEach((item) => {
+    //* Card add section
+    const cardElement = document.createElement('div');
+    cardElement.className = 'border-2 border-green-500 rounded-md p-5 h-full';
+    cardElement.innerText = item.word;
+    cardContainer.appendChild(cardElement);
+
+    //* Card click event
+    cardElement.addEventListener('click', () => {
+      console.log(item.word);
+      cardElement.classList.add('border-red-500');
+      cardElement.innerText = item.meaning;
+    });
+  });
+
+  resetButton.classList.remove('hidden');
+  startButton.classList.add('hidden');
+};
+
+const handleReset = () => {
+  cardContainer.innerHTML = '';
+
+  startButton.classList.remove('hidden');
+  resetButton.classList.add('hidden');
+};
